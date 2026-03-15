@@ -130,8 +130,14 @@ begin
 		wait for k_clk_period;
 		  assert w_o_lights_L = "000" report "bad on left off" severity failure;
 		  
+		wait for k_clk_period;
+		
+		w_i_reset <= '1';
+		wait for k_clk_period;
+		  assert w_o_lights_L = "000" report "bad reset";
 		  
-		w_i_left <= '0'; w_i_right <= '1';
+		  
+		w_i_left <= '0'; w_i_right <= '1'; w_i_reset <= '0';
 		wait for k_clk_period;
 		  assert w_o_lights_R = "001" report "bad on first right light" severity failure;
 		  
